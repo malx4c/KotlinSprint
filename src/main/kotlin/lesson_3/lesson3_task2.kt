@@ -4,14 +4,12 @@ fun main() {
     var lastName = "Андреева"
     val firstName = "Татьяна"
     val surName = "Сергеевна"
-    val lastNameUpdate = "Сидорова"
     var age = 20
-    val ageUpdate = 22
 
     println("$lastName $firstName $surName, $age")
 
-    lastName = lastNameUpdate
-    age =  ageUpdate
+    lastName = "Сидорова"
+    age =  22
     println("$lastName $firstName $surName, $age")
 }
 
