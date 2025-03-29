@@ -1,11 +1,21 @@
 package lesson_4
 
 fun main() {
-   val sunnyWeather = true
-   val coverOpen = true
-   val humidity = 20
-   val timeOfYear = "зима"
+   val sunnyWeather: Boolean
+   val coverOpen: Boolean
+   val humidity: Int
+   val timeOfYear: String
 
-   println("Благоприятные ли условия сейчас для роста бобовых? ${sunnyWeather && coverOpen && humidity == 20 && timeOfYear !== "зима"}")
+   sunnyWeather  = true
+   coverOpen = true
+   humidity = 20
+   timeOfYear  = "зима"
+
+   val result = sunnyWeather == SUNNY && coverOpen == COVER && humidity == HUMIDITY && timeOfYear !== WINTER
+   println("Благоприятные ли условия сейчас для роста бобовых? $result")
 }
 
+const val COVER = true
+const val SUNNY = true
+const val HUMIDITY= 20
+const val WINTER= "зима"
