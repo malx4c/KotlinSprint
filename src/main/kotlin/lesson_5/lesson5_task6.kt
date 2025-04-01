@@ -16,8 +16,8 @@ fun main() {
 
     val message = when (true) {
         (bodyMassIndex < BMI_MIN)  -> "Недостаточная масса тела"
-        (bodyMassIndex >= BMI_MIN &&  bodyMassIndex < BMI_NORMAL)  -> "Нормальная масса тела"
-        (bodyMassIndex >= BMI_NORMAL &&  bodyMassIndex < BMI_CRITICAL)  -> "Избыточная масса тела"
+        (bodyMassIndex < BMI_NORMAL)  -> "Нормальная масса тела"
+        (bodyMassIndex < BMI_CRITICAL)  -> "Избыточная масса тела"
         else -> "Ожирение"
     }
     println(message)
