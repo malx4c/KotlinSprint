@@ -5,7 +5,7 @@ fun main() {
     val searchText = readln().lowercase()
 
     for (ingredient in ingredients) {
-        if (ingredients.indexOf(searchText) != -1) {
+        if (ingredient == searchText) {
             println("Ингредиент $ingredient в рецепте есть")
             return
         }
