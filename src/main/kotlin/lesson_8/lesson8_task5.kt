@@ -3,10 +3,13 @@ package lesson_8
 fun main() {
     print("Введите количество ингредиентов:")
     val numberIngredients = readln().toInt()
+    val ingredients = arrayOfNulls<String>(numberIngredients)
     var result = ""
+
     println("Введите ингредиенты:")
-    for ( i in 0..numberIngredients - 1) {
-        result += readln() + ","
+    for ( i in 0 until numberIngredients) {
+        ingredients[i] = readln()
     }
-    print(result.dropLast(1))
+    ingredients.forEach  {result  += "$it,"}
+    println(result.dropLast(1))
 }
