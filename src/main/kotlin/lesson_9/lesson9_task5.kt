@@ -3,13 +3,13 @@ package lesson_9
 fun main() {
     var result = ""
     println("Введите ингредиенты:")
-    val ingredients: MutableList<String> =  mutableListOf()
+    val ingredients: MutableSet<String> =  mutableSetOf()
 
     for ( i in 1..MIN_NUM_INGREDIENTS) {
         ingredients.add(readln())
     }
 
-    val sortedIngredients = ingredients.sorted().distinct()
+    val sortedIngredients = ingredients.sorted()
 
     for (ingredient in sortedIngredients) {
         result += "$ingredient,"
