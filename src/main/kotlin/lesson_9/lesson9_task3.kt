@@ -5,9 +5,11 @@ fun main() {
     print("Количество порций:")
     val numberPortion = readln().toInt()
 
-    var message = "На $numberPortion порций вам понадобится: Яиц: ${numberIngredients[0] * numberPortion}, "
-    message += "молока: ${numberIngredients[1] * numberPortion}, "
-    message += "сливочного масла: ${numberIngredients[2] * numberPortion}"
+    val totalIngredients = numberIngredients.map { it * numberPortion }
+
+    var message = "На $numberPortion порций вам понадобится: Яиц: ${totalIngredients[0]}, "
+    message += "молока: ${totalIngredients[1]}, "
+    message += "сливочного масла: ${totalIngredients[2]}"
 
     print(message)
 }
