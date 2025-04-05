@@ -6,18 +6,16 @@ fun main() {
     val passLenght = readln().toInt()
     if (passLenght < MIN_PASS_LENGHT) return
 
-    var pass = ""
     val charLower = 'a'..'z'
     val charUpper = 'A'..'Z'
     val numbers =  0..9
+    val allChars= charLower + charUpper + numbers
+    var pass = "${charLower.random()}${numbers.random()}${charUpper.random()}"
 
     for (i in 1..passLenght - 3) {
-        if ((0..1).random() == 1) {
-            pass += (charLower + charUpper).random()
-        } else
-            pass += numbers.random().toString()
+        pass += allChars.random()
     }
-    pass += "${charLower.random()}${numbers.random()}${charUpper.random()}"
+
     println(pass)
 }
 
