@@ -23,7 +23,11 @@ fun getPassword(length: Int): String {
     if (length == 1) return allChars.random().toString()
 
     for ( i in 1..length - 2) {
-            result += allChars.random()
+        result += allChars.random()
+        if ( i % 2 == 0)
+            result += SPECIAL_CHARS.random()
+        else
+            result += NUMBERS.random()
     }
 
     result += SPECIAL_CHARS.random() + NUMBERS.random().toString()
