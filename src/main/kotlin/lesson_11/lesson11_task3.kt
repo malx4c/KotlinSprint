@@ -1,17 +1,17 @@
 package lesson_11.task3
 
 fun main() {
-    val member1 = Member (
+    val member1 = Member(
         id = 1,
         name = "user1",
         avatar = "image1.png"
     )
-    val member2 = Member (
+    val member2 = Member(
         id = 2,
         name = "user2",
         avatar = "image2.png"
     )
-    val member3 = Member (
+    val member3 = Member(
         id = 3,
         name = "user3",
         avatar = "image3.png"
@@ -19,7 +19,7 @@ fun main() {
     val room1 = ChartRoom(
         id = 1,
         name = "first chart room",
-        cover = "Cover First Room",
+        cover = "сover_first_room.png",
     )
 
     room1.addMember(member1)
@@ -28,15 +28,15 @@ fun main() {
 
     room1.setStatusMember(member1.name, STATUS_MIC_OFF)
     room1.setStatusMember(member2.name, STATUS_SPEAKS)
-    room1.setStatusMember(member3.name, STATSU_MUTE)
+    room1.setStatusMember(member3.name, STATUS_MUTE)
 
     println("Комната ${room1.name}, участников: ${room1.members.size}")
-    println("member1 стутус: ${member1.status}")
-    println("member2 стутус: ${member2.status}")
-    println("member3 стутус: ${member3.status}")
+    println("member1 статус: ${member1.status}")
+    println("member2 статус: ${member2.status}")
+    println("member3 статус: ${member3.status}")
 }
 
-class ChartRoom (
+class ChartRoom(
     val id: Int,
     val name: String,
     val cover: String,
@@ -53,15 +53,13 @@ class ChartRoom (
     }
 }
 
-class Member (
+class Member(
     val id: Int,
     val name: String,
     val avatar: String,
     var status: String = "",
-){
-
-}
+)
 
 const val STATUS_SPEAKS = "разговаривает"
 const val STATUS_MIC_OFF = "микрофон выключен"
-const val STATSU_MUTE = "пользователь заглушен"
+const val STATUS_MUTE = "пользователь заглушен"
