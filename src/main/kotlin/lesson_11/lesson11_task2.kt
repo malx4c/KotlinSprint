@@ -5,20 +5,19 @@ fun main() {
     val user1 = User2 (
         id = 1,
         login = "u1login",
-        pass = "u1pass",
+        password = "u1pass",
         email = "user1@user.xyz"
     )
-
+    user1.printInfo()
     user1.setBio()
     user1.setPass()
     user1.printInfo()
-
 }
 
 class User2(
     val id: Int,
     val login: String,
-    var pass: String,
+    var password: String,
     val email: String,
     var bio: String = "",
 ) {
@@ -26,9 +25,9 @@ class User2(
     fun printInfo() {
         println("id: $id")
         println("login: $login")
-        println("pass: $pass")
+        println("pass: $password")
         println("email: $email")
-        println("bio: $bio")
+        println("bio: ${bio.ifBlank { " Нет данных" }}")
     }
 
     fun setBio() {
@@ -37,16 +36,14 @@ class User2(
     }
 
     fun setPass() {
-
         print("Введите текущий пароль:")
-        if(readln() == pass) {
+
+        if(readln() == password) {
             print("Введите новый пароль:")
-            pass = readln()
+            password = readln()
             println("Пароль изменен успешно")
         } else {
             println("Пароль не верный.")
         }
     }
 }
-
-
