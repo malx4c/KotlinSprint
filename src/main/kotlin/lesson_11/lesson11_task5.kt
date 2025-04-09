@@ -36,7 +36,7 @@ class Forum() {
     fun printThread() {
         for (message in messages) {
             val member = members.find { it.userId == message.authorId }
-            println("${member!!.userName}: ${message.message}")
+            if (member != null) println("${member.userName}: ${message.message}")
         }
     }
 
