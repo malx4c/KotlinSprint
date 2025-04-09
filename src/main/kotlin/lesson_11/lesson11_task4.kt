@@ -5,7 +5,7 @@ class RecipeCategoty(
     val name: String,
     val imageUrl: String,
     val description: String,
-    val recipe: List<Recipe> = listOf()
+    val recipes: List<Recipe> = listOf()
 )
 
 class Recipe(
