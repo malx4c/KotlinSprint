@@ -2,12 +2,13 @@ package lesson_11.task2
 
 fun main() {
 
-    val user1 = User2 (
+    val user1 = User2(
         id = 1,
         login = "u1login",
         password = "u1pass",
         email = "user1@user.xyz"
     )
+
     user1.printInfo()
     user1.setBio()
     user1.setPass()
@@ -38,7 +39,7 @@ class User2(
     fun setPass() {
         print("Введите текущий пароль:")
 
-        if(readln() == password) {
+        if (readln() == password) {
             print("Введите новый пароль:")
             password = readln()
             println("Пароль изменен успешно")
