@@ -15,13 +15,13 @@ class Weather2(
     nightTemperature: Int,
     hasPrecipitation: Boolean
 ) {
-    var dayTemperature = dayTemperature
-    var nightTemperature = nightTemperature
+    var dayTemperature = (dayTemperature - KELVIN_CONVERSION_FACTOR).toInt()
+    var nightTemperature = (nightTemperature - KELVIN_CONVERSION_FACTOR).toInt()
     var hasPrecipitation = hasPrecipitation
 
     fun printInfo() {
-        println("Дневная температура: ${(dayTemperature - KELVIN_CONVERSION_FACTOR).toInt()} ")
-        println("Ночная температура: ${(nightTemperature - KELVIN_CONVERSION_FACTOR).toInt()}")
+        println("Дневная температура: $dayTemperature")
+        println("Ночная температура: $nightTemperature")
         println("Осадки: $hasPrecipitation")
     }
 }
