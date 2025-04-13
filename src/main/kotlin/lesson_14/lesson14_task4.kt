@@ -12,8 +12,7 @@ fun main() {
             ),
         )
 
-    println("Планета: ${planet.name}")
-    planet.satellites.map { println("Спутник: ${it.name}") }
+    planet.printSatellites()
 }
 
 class Planet(
@@ -21,7 +20,16 @@ class Planet(
     hasAtmosphere: Boolean,
     isLandingPossible: Boolean,
     val satellites: List<Satellite>,
-) : SkyBody(name, hasAtmosphere, isLandingPossible)
+) : SkyBody(name, hasAtmosphere, isLandingPossible) {
+    fun printSatellites() {
+        println("Планета: $name")
+        if (satellites.isNotEmpty()) {
+            satellites.map { println("Спутник: ${it.name}") }
+        } else {
+            println("Не имеет спутников")
+        }
+    }
+}
 
 class Satellite(
     name: String,
