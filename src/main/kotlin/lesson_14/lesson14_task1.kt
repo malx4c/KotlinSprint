@@ -7,7 +7,7 @@ fun main() {
 }
 
 open class Liner(
-    val name: String,
+    open val name: String,
     val speed: Int = DEF_SPEED,
     val liftingCapacity: Int = DEF_LIFTING_CAPACITY,
     val numberPassengers: Int = DEF_NUMBER_PASSENGERS,
@@ -15,17 +15,20 @@ open class Liner(
 )
 
 class CargoShip(
-    name: String,
-    speed: Int = 15,
-    liftingCapacity: Int = 1000,
-) : Liner(name, speed, liftingCapacity)
+    override val name: String,
+) : Liner(
+        name = name,
+        speed = 15,
+        liftingCapacity = 5000,
+)
 
 class IceBreaker(
-    name: String,
-    speed: Int = 10,
-    liftingCapacity: Int = 200,
-    canCrushIce: Boolean = true,
-) : Liner(name, speed, liftingCapacity)
+    override val name: String,
+) : Liner(
+        name = name,
+        speed = 10,
+        canCrushIce = true,
+)
 
 const val DEF_SPEED = 25
 const val DEF_NUMBER_PASSENGERS = 25
