@@ -3,23 +3,30 @@ package lesson_14.task2
 fun main() {
     val ships =
         listOf(
-            Liner("Liner", 30, 1500),
-            CargoShip("CargoShip", 10, 2000),
-            IceBreaker("IceBreaker", 5, true),
+            Liner("Liner", numberPassengers = 2000),
+            CargoShip("CargoShip"),
+            IceBreaker("IceBreaker"),
         )
 
-    ships.forEach { it.printInfo() }
+    ships.forEach {
+        it.printInfo()
+        it.runLoading()
+    }
 }
 
 open class Liner(
-    val name: String = DEF_NAME,
+    open val name: String,
     val speed: Int = DEF_SPEED,
+    val liftingCapacity: Int = DEF_LIFTING_CAPACITY,
     val numberPassengers: Int = DEF_NUMBER_PASSENGERS,
+    val canCrushIce: Boolean = false,
 ) {
-    open fun printInfo() {
+    fun printInfo() {
         println("Название: $name")
         println("Скорость: $speed")
         println("Количество пассажиров: $numberPassengers")
+        println("Грузоподъемность: $liftingCapacity")
+        println("Способен колоть лед: $canCrushIce")
     }
 
     open fun runLoading() {
@@ -28,35 +35,29 @@ open class Liner(
 }
 
 class CargoShip(
-    name: String,
-    speed: Int,
-    val liftingCapacity: Int,
-) : Liner(name, speed) {
-    override fun printInfo() {
-        super.printInfo()
-        println("Грузоподъемность: $liftingCapacity")
-    }
-
+    override val name: String,
+) : Liner(
+        name = name,
+        speed = 15,
+        liftingCapacity = 5000,
+) {
     override fun runLoading() {
         println("Активировать погрузочный кран.")
     }
 }
 
 class IceBreaker(
-    name: String,
-    speed: Int,
-    val canCrushIce: Boolean = true,
-) : Liner(name, speed) {
-    override fun printInfo() {
-        super.printInfo()
-        println("Может колоть лёд: $canCrushIce")
-    }
-
+    override val name: String,
+) : Liner(
+        name = name,
+        speed = 10,
+        canCrushIce = true,
+) {
     override fun runLoading() {
         println("Открыть ворота со стороны кормы.")
     }
 }
 
-const val DEF_NAME = "Ship"
 const val DEF_SPEED = 25
 const val DEF_NUMBER_PASSENGERS = 25
+const val DEF_LIFTING_CAPACITY = 100
