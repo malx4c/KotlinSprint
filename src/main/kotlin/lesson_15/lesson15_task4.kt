@@ -5,23 +5,23 @@ fun main() {
     guitars.runSearch("струны")
 }
 
-abstract class Good {
-    abstract val name: String
-    abstract val countOfStock: Int
-}
+abstract class Good(
+    val name: String,
+    val countOfStock: Int,
+)
 
 class Instrument(
-    override val name: String,
-    override val countOfStock: Int,
-) : Good(),
+    name: String,
+    countOfStock: Int,
+) : Good(name, countOfStock),
     Search {
     val components: List<Component> = listOf()
 }
 
 class Component(
-    override val name: String,
-    override val countOfStock: Int,
-) : Good()
+    name: String,
+    countOfStock: Int,
+) : Good(name, countOfStock)
 
 interface Search {
     fun runSearch(searchText: String) {
