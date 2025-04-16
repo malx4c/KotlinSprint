@@ -13,10 +13,10 @@ fun main() {
     admin.deleteUser()
 }
 
-abstract class Participants {
-    abstract val id: Int
-    abstract val name: String
-
+abstract class Participants(
+    val id: Int,
+    val name: String,
+) {
     fun readMessage() {
         println("$name читает сообщение")
     }
@@ -27,14 +27,14 @@ abstract class Participants {
 }
 
 class User(
-    override val id: Int,
-    override val name: String,
-) : Participants()
+    id: Int,
+    name: String,
+) : Participants(id, name)
 
 class Admin(
-    override val id: Int,
-    override val name: String,
-) : Participants() {
+    id: Int,
+    name: String,
+) : Participants(id, name) {
     fun deleteMessage() {
         println("$name удаляет сообщение")
     }
