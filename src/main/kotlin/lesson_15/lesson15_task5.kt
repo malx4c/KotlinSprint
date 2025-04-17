@@ -1,9 +1,9 @@
 package lesson_15
 
-val cars: MutableList<Car> = mutableListOf()
-val trucks: MutableList<Truck> = mutableListOf()
-
 fun main() {
+    val cars: MutableList<Car> = mutableListOf()
+    val trucks: MutableList<Truck> = mutableListOf()
+
     cars.add(Car(getCarNameFake()))
     trucks.add(Truck(getTruckNameFake()))
 
@@ -14,7 +14,7 @@ fun main() {
         if (cars.last().isFreePlace()) {
             cars.last().load()
         } else {
-            cars.add(Car(getCarNameFake()))
+            cars.add(Car(getCarNameFake(cars.size)))
             cars.last().load()
         }
     }
@@ -23,7 +23,7 @@ fun main() {
         if (trucks.last().isFreePlace()) {
             trucks.last().load()
         } else {
-            trucks.add(Truck(getTruckNameFake()))
+            trucks.add(Truck(getTruckNameFake(trucks.size)))
             trucks.last().load()
         }
     }
@@ -44,9 +44,7 @@ fun main() {
 abstract class Vehicle(
     val name: String,
     val numberOfPassengers: Int,
-) : Movement,
-    Loading,
-    UnLoading {
+) : Movement {
     abstract fun isFreePlace(): Boolean
 
     init {
@@ -57,7 +55,8 @@ abstract class Vehicle(
 class Car(
     name: String,
     numberOfPassengers: Int = MAX_NUMBER_OF_PASSENGER,
-) : Vehicle(name, numberOfPassengers) {
+) : Vehicle(name, numberOfPassengers),
+    PassengerTransportable {
     private var currentNumberOfPassengers: Int = 0
 
     override fun isFreePlace(): Boolean = (currentNumberOfPassengers < numberOfPassengers)
@@ -81,7 +80,8 @@ class Truck(
     name: String,
     numberOfPassengers: Int = 1,
     val liftingCapacity: Int = MAX_LIFTING_CAPACITY,
-) : Vehicle(name, numberOfPassengers) {
+) : Vehicle(name, numberOfPassengers),
+    CargoTransportable {
     private var currentCargoWeight: Float = 0F
 
     override fun isFreePlace(): Boolean = (currentCargoWeight < liftingCapacity)
@@ -111,17 +111,21 @@ interface Movement {
     }
 }
 
-interface Loading {
+interface PassengerTransportable {
     fun load()
+
+    fun unload()
 }
 
-interface UnLoading {
+interface CargoTransportable {
+    fun load()
+
     fun unload()
 }
 
 const val MAX_NUMBER_OF_PASSENGER = 3
 const val MAX_LIFTING_CAPACITY = 2
 
-fun getCarNameFake(): String = "Легковая машина ${cars.size + 1} "
+fun getCarNameFake(size: Int = 0): String = "Легковая машина ${size + 1} "
 
-fun getTruckNameFake(): String = "Грузовая машина ${trucks.size + 1} "
+fun getTruckNameFake(size: Int = 0): String = "Грузовая машина ${size + 1} "
