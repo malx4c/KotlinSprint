@@ -4,16 +4,9 @@ fun main() {
     val order = Order(1)
     println("Статус заказа ${order.numberOrder}: ${order.getStatus()}")
 
-    updateOrderStatus(order, "Оплачен")
+    order.updateOrderStatus("Оплачен")
 
     println("Статус заказа ${order.numberOrder}: ${order.getStatus()}")
-}
-
-fun updateOrderStatus(
-    order: Order,
-    status: String,
-) {
-    order.setStatus(status)
 }
 
 class Order(
@@ -21,8 +14,12 @@ class Order(
 ) {
     private var status: String = "Новый"
 
-    fun setStatus(status: String) {
+    private fun setStatus(status: String) {
         this.status = status
+    }
+
+    fun updateOrderStatus(status: String) {
+        setStatus(status)
     }
 
     fun getStatus(): String = status
