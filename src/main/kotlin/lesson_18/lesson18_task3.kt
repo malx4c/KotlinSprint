@@ -14,6 +14,10 @@ abstract class Animal(
     val name: String,
 ) {
     abstract fun eat()
+
+    fun sleep() {
+        println("$name спит")
+    }
 }
 
 class Fox(
