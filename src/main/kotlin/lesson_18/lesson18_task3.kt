@@ -1,4 +1,4 @@
-package lesson_18
+package lesson_18.task3
 
 fun main() {
     val animals: List<Animal> =
