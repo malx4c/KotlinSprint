@@ -10,28 +10,16 @@ fun main() {
     dices.forEach { it.rollTheDice() }
 }
 
-abstract class Dice {
-    abstract fun rollTheDice()
-
-    fun printResult(number: Int) {
-        print(this.javaClass.simpleName + ": выпало $number\n")
+abstract class Dice(
+    val numberOfFaces: Int,
+) {
+    fun rollTheDice() {
+        print(this.javaClass.simpleName + ": выпало ${(1..numberOfFaces).random()}\n")
     }
 }
 
-class Dice4 : Dice() {
-    override fun rollTheDice() {
-        printResult((1..4).random())
-    }
-}
+class Dice4 : Dice(4)
 
-class Dice6 : Dice() {
-    override fun rollTheDice() {
-        printResult((1..4).random())
-    }
-}
+class Dice6 : Dice(6)
 
-class Dice8 : Dice() {
-    override fun rollTheDice() {
-        printResult((1..4).random())
-    }
-}
+class Dice8 : Dice(8)
