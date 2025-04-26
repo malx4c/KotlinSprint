@@ -12,16 +12,16 @@ fun main() {
 
     for (i in 1..numberPassenger) {
         if (cars.last().isFreePlace()) {
-            cars.last().load()
+            cars.last().loadPassenger()
         } else {
             cars.add(Car(getCarNameFake(cars.size)))
-            cars.last().load()
+            cars.last().loadPassenger()
         }
     }
 
     for (i in 1..cargoWeight) {
         if (trucks.last().isFreePlace()) {
-            trucks.last().load()
+            trucks.last().loadPassenger()
         } else {
             trucks.add(Truck(getTruckNameFake(trucks.size)))
             trucks.last().load()
@@ -31,7 +31,7 @@ fun main() {
     cars.forEach {
         it.run()
         it.stop()
-        it.unload()
+        it.unloadPassenger()
     }
 
     trucks.forEach {
@@ -41,86 +41,74 @@ fun main() {
     }
 }
 
-abstract class Vehicle(
+class Car(
     val name: String,
-    val numberOfPassengers: Int,
-) : Movement {
-    abstract fun isFreePlace(): Boolean
+    val numberOfPassengers: Int = MAX_NUMBER_OF_PASSENGER,
+) : Movement,
+    PassengerTransportable {
+    override val maxNumberOfPassengers = numberOfPassengers
+    override var currentNumberOfPassengers = 0
 
-    init {
-        println("\tНовая $name")
-    }
+    fun isFreePlace(): Boolean = (currentNumberOfPassengers < numberOfPassengers)
 }
 
-class Car(
-    name: String,
-    numberOfPassengers: Int = MAX_NUMBER_OF_PASSENGER,
-) : Vehicle(name, numberOfPassengers),
+class Truck(
+    val name: String,
+    val numberOfPassengers: Int = 1,
+    val liftingCapacity: Int = MAX_LIFTING_CAPACITY,
+) : Movement,
+    CargoTransportable,
     PassengerTransportable {
-    private var currentNumberOfPassengers: Int = 0
+    override val maxLiftingCapacity = liftingCapacity
+    override var currentCargoWeight = 0F
+    override val maxNumberOfPassengers = numberOfPassengers
+    override var currentNumberOfPassengers = 0
 
-    override fun isFreePlace(): Boolean = (currentNumberOfPassengers < numberOfPassengers)
+    fun isFreePlace(): Boolean = (currentCargoWeight < liftingCapacity)
+}
 
-    override fun load() {
-        if (currentNumberOfPassengers <= numberOfPassengers) {
+interface Movement {
+    fun run() = println("Начать движение")
+
+    fun stop() = println("Остановиться")
+}
+
+interface PassengerTransportable {
+    val maxNumberOfPassengers: Int
+    var currentNumberOfPassengers: Int
+
+    fun loadPassenger() {
+        if (currentNumberOfPassengers <= maxNumberOfPassengers) {
             currentNumberOfPassengers++
-            println("$name: Открыть дверь, посадить пассажира N $currentNumberOfPassengers")
+            println("Открыть дверь, посадить пассажира N $currentNumberOfPassengers")
         }
     }
 
-    override fun unload() {
+    fun unloadPassenger() {
         while (currentNumberOfPassengers != 0) {
-            println("$name: Открыть дверь, высадить пассажира N $currentNumberOfPassengers")
+            println("Открыть дверь, высадить пассажира N $currentNumberOfPassengers")
             currentNumberOfPassengers--
         }
     }
 }
 
-class Truck(
-    name: String,
-    numberOfPassengers: Int = 1,
-    val liftingCapacity: Int = MAX_LIFTING_CAPACITY,
-) : Vehicle(name, numberOfPassengers),
-    CargoTransportable {
-    private var currentCargoWeight: Float = 0F
+interface CargoTransportable {
+    val maxLiftingCapacity: Int
+    var currentCargoWeight: Float
 
-    override fun isFreePlace(): Boolean = (currentCargoWeight < liftingCapacity)
-
-    override fun load() {
-        if (currentCargoWeight <= liftingCapacity) {
+    fun load() {
+        if (currentCargoWeight <= maxLiftingCapacity) {
             currentCargoWeight++
-            println("$name: Загружено $currentCargoWeight")
+            println("Загружено $currentCargoWeight")
         }
     }
 
-    override fun unload() {
+    fun unload() {
         while (currentCargoWeight != 0f) {
-            println("$name: Выгрузить груз, осталось $currentCargoWeight")
+            println("Выгрузить груз, осталось $currentCargoWeight")
             currentCargoWeight--
         }
     }
-}
-
-interface Movement {
-    fun run() {
-        println("Начать движение")
-    }
-
-    fun stop() {
-        println("Остановиться")
-    }
-}
-
-interface PassengerTransportable {
-    fun load()
-
-    fun unload()
-}
-
-interface CargoTransportable {
-    fun load()
-
-    fun unload()
 }
 
 const val MAX_NUMBER_OF_PASSENGER = 3
